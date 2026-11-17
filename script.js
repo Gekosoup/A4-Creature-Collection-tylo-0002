@@ -39,9 +39,13 @@ const $creatures = [
 ]
 
 // YOUR WORK: build these features using the supplied HTML, CSS, and data.
+
 // 1. Select the collection and preference controls.
-// 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
-// 3. Listen for changes to each preference control and update the appearance.
-// 4. Save both selected preferences to Local Storage.
-// 5. Check for saved data on load and restore the controls and appearance.
-// Add short pseudocode comments before writing each feature.
+const $collection = document.querySelector("#creature-collection");
+const $themeSelect = document.querySelector("#theme-select");
+const $layoutSelect = document.querySelector("#layout-select");
+const $message = document.querySelector("#status-message");
+
+// Assignment-specific Local Storage key.
+const STORAGE_KEY = "a4CreatureCollectionPreferences";
+
