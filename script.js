@@ -78,3 +78,9 @@ function generateCreatures() {
 function applyTheme(theme) {
   document.body.dataset.theme = theme;
 }
+
+// 4. Apply the selected layout to the creature collection.
+function applyLayout(layout) {
+  $collection.dataset.layout = layout;
+}
+
