@@ -49,3 +49,29 @@ const $message = document.querySelector("#status-message");
 // Assignment-specific Local Storage key.
 const STORAGE_KEY = "a4CreatureCollectionPreferences";
 
+// 2. Generate creature entries using the supplied array.
+// Loop through each creature and create its image, name and description.
+function generateCreatures() {
+  $creatures.forEach((creature) => {
+    const $article = document.createElement("article");
+    $article.classList.add("creature-card");
+
+    const $image = document.createElement("img");
+    $image.src = creature.image;
+    $image.alt = creature.alt;
+
+    const $heading = document.createElement("h2");
+    $heading.textContent = creature.name;
+
+    const $description = document.createElement("p");
+    $description.textContent = creature.description;
+
+    $article.appendChild($image);
+    $article.appendChild($heading);
+    $article.appendChild($description);
+
+    $collection.appendChild($article);
+  });
+}
+
+
