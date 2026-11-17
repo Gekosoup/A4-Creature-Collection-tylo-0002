@@ -114,7 +114,29 @@ $layoutSelect.addEventListener("change", () => {
   savePreferences();
 });
 
+// 8. Restore saved preferences when the page loads.
+// If there are no saved preferences, keep the default appearance.
+function restorePreferences() {
+  const savedPreferences = localStorage.getItem(STORAGE_KEY);
 
+  if (savedPreferences) {
+    const preferences = JSON.parse(savedPreferences);
+
+    $themeSelect.value = preferences.theme;
+    $layoutSelect.value = preferences.layout;
+
+    applyTheme(preferences.theme);
+    applyLayout(preferences.layout);
+
+    $message.textContent = "Your saved preferences have been restored!";
+  } else {
+    $message.textContent = "Welcome! Customize your creature collection.";
+  }
+}
+
+// 9. Generate creatures and restore preferences.
+generateCreatures();
+restorePreferences();
 
 
 
