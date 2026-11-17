@@ -74,4 +74,7 @@ function generateCreatures() {
   });
 }
 
-
+// 3. Apply the selected habitat theme to the body.
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+}
