@@ -40,46 +40,64 @@ const $creatures = [
 
 // YOUR WORK: build these features using the supplied HTML, CSS, and data.
 
+
 // 1. Select the collection and preference controls.
-const $collection = document.querySelector("#creature-collection");
-const $themeSelect = document.querySelector("#theme-select");
-const $layoutSelect = document.querySelector("#layout-select");
-const $message = document.querySelector("#status-message");
+const $collection = document.querySelector("#collection");
+const $themeSelect = document.querySelector("#theme");
+const $layoutSelect = document.querySelector("#layout");
+const $message = document.querySelector("#status");
 
 // Assignment-specific Local Storage key.
 const STORAGE_KEY = "a4CreatureCollectionPreferences";
 
+
 // 2. Generate creature entries using the supplied array.
-// Loop through each creature and create its image, name and description.
+// Create an image and an information container for each creature.
 function generateCreatures() {
   $creatures.forEach((creature) => {
-    const $article = document.createElement("article");
-    $article.classList.add("creature-card");
 
+    const $item = document.createElement("li");
+    $item.classList.add("creature");
+
+    // Create creature image.
     const $image = document.createElement("img");
     $image.src = creature.image;
     $image.alt = creature.alt;
 
-    const $heading = document.createElement("h2");
+    // Create information container.
+    const $info = document.createElement("div");
+    $info.classList.add("creature-info");
+
+    // Create creature name.
+    const $heading = document.createElement("h3");
     $heading.textContent = creature.name;
 
+    // Create creature description.
     const $description = document.createElement("p");
+    $description.classList.add("creature-description");
     $description.textContent = creature.description;
 
-    $article.appendChild($image);
-    $article.appendChild($heading);
-    $article.appendChild($description);
+    // Add name and description to information container.
+    $info.appendChild($heading);
+    $info.appendChild($description);
 
-    $collection.appendChild($article);
+    // Add image and information to creature list item.
+    $item.appendChild($image);
+    $item.appendChild($info);
+
+    // Add creature to the collection.
+    $collection.appendChild($item);
   });
 }
 
-// 3. Apply the selected habitat theme to the body.
+
+// 3. Apply the selected habitat theme.
 function applyTheme(theme) {
   document.body.dataset.theme = theme;
 }
 
-// 4. Apply the selected layout to the creature collection.
+
+// 4. Apply the selected collection layout.
 function applyLayout(layout) {
   $collection.dataset.layout = layout;
 }
@@ -101,21 +119,22 @@ function savePreferences() {
 }
 
 
-// 6. Listen for changes to the theme control.
+// 6. Listen for changes to the habitat theme.
 $themeSelect.addEventListener("change", () => {
   applyTheme($themeSelect.value);
   savePreferences();
 });
 
 
-// 7. Listen for changes to the layout control.
+// 7. Listen for changes to the collection layout.
 $layoutSelect.addEventListener("change", () => {
   applyLayout($layoutSelect.value);
   savePreferences();
 });
 
+
 // 8. Restore saved preferences when the page loads.
-// If there are no saved preferences, keep the default appearance.
+// Check Local Storage before attempting to parse saved data.
 function restorePreferences() {
   const savedPreferences = localStorage.getItem(STORAGE_KEY);
 
@@ -134,9 +153,7 @@ function restorePreferences() {
   }
 }
 
-// 9. Generate creatures and restore preferences.
+
+// 9. Generate the collection and restore preferences.
 generateCreatures();
 restorePreferences();
-
-
-
