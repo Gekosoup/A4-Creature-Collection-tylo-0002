@@ -84,3 +84,37 @@ function applyLayout(layout) {
   $collection.dataset.layout = layout;
 }
 
+
+// 5. Save both preferences together in Local Storage.
+function savePreferences() {
+  const preferences = {
+    theme: $themeSelect.value,
+    layout: $layoutSelect.value
+  };
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(preferences)
+  );
+
+  $message.textContent = "Your preferences have been saved!";
+}
+
+
+// 6. Listen for changes to the theme control.
+$themeSelect.addEventListener("change", () => {
+  applyTheme($themeSelect.value);
+  savePreferences();
+});
+
+
+// 7. Listen for changes to the layout control.
+$layoutSelect.addEventListener("change", () => {
+  applyLayout($layoutSelect.value);
+  savePreferences();
+});
+
+
+
+
+
